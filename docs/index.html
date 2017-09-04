@@ -8449,13 +8449,41 @@ var _user$project$NatoPhonetic$natoPhonetic = _elm_lang$core$Dict$fromList(
 			}
 		}
 	});
-var _user$project$Main$myStyle = _elm_lang$html$Html_Attributes$style(
+var _user$project$Main$outputStyle = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'font-size', _1: '2em'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'line-height', _1: '1.5'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'white-space', _1: 'pre-line'},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Main$placeholderStyle = _elm_lang$html$Html_Attributes$style(
+	{
+		ctor: '::',
+		_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
+		_1: {
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'height', _1: '10%'},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'font-size', _1: '2em'},
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$Main$mainStyle = _elm_lang$html$Html_Attributes$style(
 	{
 		ctor: '::',
 		_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
 		_1: {
 			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'align', _1: 'center'},
+			_0: {ctor: '_Tuple2', _0: 'margin', _1: 'auto'},
 			_1: {ctor: '[]'}
 		}
 	});
@@ -8528,7 +8556,7 @@ var _user$project$Main$view = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _user$project$Main$myStyle,
+			_0: _user$project$Main$mainStyle,
 			_1: {ctor: '[]'}
 		},
 		{
@@ -8541,7 +8569,11 @@ var _user$project$Main$view = function (model) {
 					_1: {
 						ctor: '::',
 						_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$Convert),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _user$project$Main$placeholderStyle,
+							_1: {ctor: '[]'}
+						}
 					}
 				},
 				{ctor: '[]'}),
@@ -8555,7 +8587,11 @@ var _user$project$Main$view = function (model) {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$p,
-						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _user$project$Main$outputStyle,
+							_1: {ctor: '[]'}
+						},
 						{
 							ctor: '::',
 							_0: _elm_lang$html$Html$text(model.target),
