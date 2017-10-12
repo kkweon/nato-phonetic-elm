@@ -11,49 +11,13 @@ import Html.Attributes exposing (..)
 import Dict exposing (get)
 
 
--- Character to Nato Words
-
-
-char2Nato : Char -> Maybe String
-char2Nato x =
-    let
-        buildString x y =
-            toString x ++ " -> " ++ y
-
-        getter x =
-            get x natoPhonetic
-                |> Maybe.map (buildString x)
-    in
-        x
-            |> Char.toUpper
-            |> getter
-
-
-sentence2Nato : String -> List (Maybe String)
-sentence2Nato xs =
-    String.toList xs
-        |> List.map char2Nato
-
-
-
--- List (Maybe String) -> List String
-
-
-concatListMaybeString : List (Maybe String) -> String
-concatListMaybeString xs =
-    let
-        handleMaybe : Maybe String -> String
-        handleMaybe xs =
-            case xs of
-                Nothing ->
-                    ""
-
-                Just val ->
-                    val
-    in
-        xs
-            |> List.map handleMaybe
-            |> String.join "\n"
+main : Program Never Model Msg
+main =
+    beginnerProgram
+        { model = initModel
+        , view = view
+        , update = update
+        }
 
 
 
@@ -138,22 +102,48 @@ view model =
             , description
             , inputArea
             , br [] []
-            , p [ class "result-view" ] [ viewPhonetic model.input ]
+            , viewPhonetic model.input
             ]
 
 
 viewPhonetic : String -> Html Msg
-viewPhonetic input =
-    input
+viewPhonetic sentence =
+    sentence
         |> sentence2Nato
-        |> concatListMaybeString
-        |> text
+
+char2Nato : Char -> ( Char, Maybe String )
+char2Nato x =
+    let
+        phoneticWord =
+            x
+                |> Char.toUpper
+                |> \c -> get c natoPhonetic
+    in
+        ( x, phoneticWord )
 
 
-main : Program Never Model Msg
-main =
-    beginnerProgram
-        { model = initModel
-        , view = view
-        , update = update
-        }
+sentence2Nato : String -> Html Msg
+sentence2Nato xs =
+    xs
+        |> String.toList
+        |> List.map (char2Nato >> viewRow)
+        |> table [class "result-view"]
+
+
+viewRow : ( Char, Maybe String ) -> Html Msg
+viewRow ( char, phoneticWord ) =
+    let
+        (word, arrow) =
+            case phoneticWord of
+                Just w ->
+                    (w, "⟼")
+
+
+                Nothing ->
+                    ("", "")
+    in
+        tr []
+            [ td [] [ text (String.fromChar (Char.toUpper char)) ]
+            , td [] [ text arrow ]
+            , td [] [ text word ]
+            ]
