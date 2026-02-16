@@ -6,10 +6,16 @@ build:
 
 
 dev:
-	@echo "Building and starting dev server..."
-	@elm make src/Main.elm --output docs/js/main.js
-	@echo "Server running at http://localhost:8000"
-	@cd docs && python3 -m http.server 8000
+	@echo "Starting dev server with auto-reload..."
+	@if command -v elm-live >/dev/null 2>&1; then \
+		elm-live src/Main.elm --dir=docs --start-page=index.html -- --output=docs/js/main.js; \
+	else \
+		echo "elm-live not found. Install with: npm install -g elm-live"; \
+		echo "Falling back to basic dev server (no auto-reload)..."; \
+		elm make src/Main.elm --output docs/js/main.js; \
+		echo "Server running at http://localhost:8000"; \
+		cd docs && python3 -m http.server 8000; \
+	fi
 
 
 clean:

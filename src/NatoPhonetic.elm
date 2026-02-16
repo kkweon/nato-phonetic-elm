@@ -5,7 +5,7 @@ import Dict
 natoPhonetic : Dict.Dict Char String
 natoPhonetic =
     Dict.fromList
-        [ ( 'A', "Alf" )
+        [ ( 'A', "Alpha" )
         , ( 'B', "Bravo" )
         , ( 'C', "Charlie" )
         , ( 'D', "Delta" )
@@ -28,7 +28,7 @@ natoPhonetic =
         , ( 'U', "Uniform" )
         , ( 'V', "Victor" )
         , ( 'W', "Whiskey" )
-        , ( 'X', "X" )
+        , ( 'X', "X-ray" )
         , ( 'Y', "Yankee" )
         , ( 'Z', "Zulu" )
         , ( '-', "Dash" )

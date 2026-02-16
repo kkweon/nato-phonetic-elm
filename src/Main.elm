@@ -82,12 +82,9 @@ view model =
 
         inputSection =
             section [ class "bg-white rounded-xl p-6 shadow-sm border border-primary/5" ]
-                [ div [ class "flex flex-col gap-2" ]
-                    [ label [ class "text-sm font-bold uppercase tracking-wider text-slate-500", attribute "for" "input-text" ]
-                        [ text "Input Text" ]
-                    , p [ class "text-slate-500 text-sm mb-2" ]
-                        [ text "Type names or phrases below to see the phonetic conversion in real-time." ]
-                    , div [ class "relative" ]
+                [ p [ class "text-slate-600 text-sm mb-3" ]
+                    [ text "Enter text below to see the phonetic conversion" ]
+                , div [ class "relative" ]
                         [ input
                             [ class "w-full rounded-xl border-2 border-slate-200 focus:border-primary focus:ring-0 p-4 pr-12 text-xl font-medium placeholder:text-slate-300 transition-all"
                             , attribute "id" "input-text"
@@ -98,24 +95,22 @@ view model =
                             , autofocus True
                             ]
                             []
-                        , if not (String.isEmpty model.input) then
-                            button
-                                [ type_ "button"
-                                , class "absolute top-1/2 -translate-y-1/2 right-3 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors text-2xl font-light cursor-pointer"
-                                , onClick ClearInputBox
-                                , attribute "title" "Clear"
-                                ]
-                                [ text "×" ]
-                          else
-                            text ""
-                        ]
+                    , if not (String.isEmpty model.input) then
+                        button
+                            [ type_ "button"
+                            , class "absolute top-1/2 -translate-y-1/2 right-3 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors text-2xl font-light cursor-pointer"
+                            , onClick ClearInputBox
+                            , attribute "title" "Clear"
+                            ]
+                            [ text "×" ]
+                      else
+                        text ""
                     ]
                 ]
 
         resultsHeader =
-            div [ class "flex items-center justify-between px-2 flex-wrap gap-y-2" ]
-                [ h3 [ class "text-xl font-bold text-[#0e101b]" ] [ text "Conversion Result" ]
-                , span [ class "text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full" ]
+            div [ class "flex items-center justify-end px-2" ]
+                [ span [ class "text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full" ]
                     [ text (String.fromInt charCount ++ " Character" ++ (if charCount == 1 then "" else "s")) ]
                 ]
 
@@ -126,15 +121,14 @@ view model =
                 ]
     in
         div [ class "relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden" ]
-            [ Html.node "main" [ class "flex-1 flex flex-col px-6 py-8 lg:px-20 gap-8 items-center" ]
+            [ Html.node "main" [ class "flex-1 flex flex-row px-6 py-8 lg:px-12 gap-8 justify-center" ]
                 [ div [ class "max-w-4xl space-y-8 w-full" ]
-                    [ h1 [ class "text-4xl font-black text-[#0e101b] text-center mb-2" ]
+                    [ h1 [ class "text-4xl font-black text-[#0e101b] text-center mb-6" ]
                         [ text "NATO Phonetic Alphabet Converter" ]
-                    , p [ class "text-center text-slate-600 mb-6" ]
-                        [ text "Convert text to phonetic alphabet for clear communication" ]
                     , inputSection
                     , resultsSection
                     ]
+                , viewCheatsheet
                 ]
             ]
 
@@ -190,4 +184,30 @@ viewSpaceCard =
             [ text "[SPACE]" ]
         , span [ class "text-xl font-bold text-slate-400 uppercase tracking-widest" ]
             [ text "SPACE" ]
+        ]
+
+
+viewCheatsheet : Html Msg
+viewCheatsheet =
+    aside [ class "hidden lg:block w-64 flex-shrink-0" ]
+        [ div [ class "sticky top-8 bg-white rounded-xl p-6 shadow-sm border border-primary/5" ]
+            [ h2 [ class "text-lg font-bold text-[#0e101b] mb-4" ]
+                [ text "NATO Alphabet" ]
+            , div [ class "space-y-1 text-sm" ]
+                (natoPhonetic
+                    |> Dict.toList
+                    |> List.filter (\(c, _) -> Char.isAlpha c)
+                    |> List.map viewCheatsheetItem
+                )
+            ]
+        ]
+
+
+viewCheatsheetItem : ( Char, String ) -> Html Msg
+viewCheatsheetItem ( char, word ) =
+    div [ class "flex items-center justify-between py-1.5 px-2 rounded hover:bg-slate-50 transition-colors" ]
+        [ span [ class "font-bold text-primary w-6" ]
+            [ text (String.fromChar char) ]
+        , span [ class "text-slate-600 font-medium flex-1 text-right" ]
+            [ text word ]
         ]
