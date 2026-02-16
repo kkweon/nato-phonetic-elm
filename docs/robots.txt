@@ -1,0 +1,8 @@
+# robots.txt for NATO Phonetic Alphabet Converter
+# https://kkweon.dev/nato-phonetic-elm/
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kkweon.dev/nato-phonetic-elm/sitemap.xml

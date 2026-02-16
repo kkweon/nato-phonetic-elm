@@ -128,7 +128,11 @@ view model =
         div [ class "relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden" ]
             [ Html.node "main" [ class "flex-1 flex flex-col px-6 py-8 lg:px-20 gap-8 items-center" ]
                 [ div [ class "max-w-4xl space-y-8 w-full" ]
-                    [ inputSection
+                    [ h1 [ class "text-4xl font-black text-[#0e101b] text-center mb-2" ]
+                        [ text "NATO Phonetic Alphabet Converter" ]
+                    , p [ class "text-center text-slate-600 mb-6" ]
+                        [ text "Convert text to phonetic alphabet for clear communication" ]
+                    , inputSection
                     , resultsSection
                     ]
                 ]

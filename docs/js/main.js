@@ -5234,6 +5234,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
@@ -5841,7 +5842,30 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$Attributes$class('max-w-4xl space-y-8 w-full')
 							]),
 						_List_fromArray(
-							[inputSection, resultsSection]))
+							[
+								A2(
+								$elm$html$Html$h1,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('text-4xl font-black text-[#0e101b] text-center mb-2')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('NATO Phonetic Alphabet Converter')
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('text-center text-slate-600 mb-6')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Convert text to phonetic alphabet for clear communication')
+									])),
+								inputSection,
+								resultsSection
+							]))
 					]))
 			]));
 };
