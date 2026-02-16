@@ -157,44 +157,21 @@ char2Nato x =
 
 viewCard : ( Char, Maybe String ) -> Html Msg
 viewCard ( char, phoneticWord ) =
-    let
-        upperChar =
-            Char.toUpper char
+    if char == ' ' then
+        viewSpaceCard
+    else
+        case phoneticWord of
+            Just word ->
+                viewLetterCard (Char.toUpper char) word
 
-        isNumber =
-            Char.isDigit upperChar
-
-        isSpace =
-            char == ' '
-    in
-        if isSpace then
-            viewSpaceCard
-        else
-            case phoneticWord of
-                Just word ->
-                    if isNumber then
-                        viewNumberCard upperChar word
-                    else
-                        viewLetterCard upperChar word
-
-                Nothing ->
-                    text ""
+            Nothing ->
+                text ""
 
 
 viewLetterCard : Char -> String -> Html Msg
 viewLetterCard char word =
     div [ class "bg-white border-2 border-slate-100 rounded-xl p-5 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-primary/30 transition-colors group" ]
         [ span [ class "text-slate-400 text-2xl font-bold group-hover:text-primary transition-colors" ]
-            [ text (String.fromChar char) ]
-        , span [ class "text-3xl font-black text-[#0e101b] tracking-tight" ]
-            [ text (String.toUpper word) ]
-        ]
-
-
-viewNumberCard : Char -> String -> Html Msg
-viewNumberCard char word =
-    div [ class "bg-white border-2 border-slate-100 rounded-xl p-5 flex flex-col items-center justify-center gap-1 shadow-sm border-primary/20" ]
-        [ span [ class "text-primary text-2xl font-bold" ]
             [ text (String.fromChar char) ]
         , span [ class "text-3xl font-black text-[#0e101b] tracking-tight" ]
             [ text (String.toUpper word) ]

@@ -5635,40 +5635,6 @@ var $author$project$Main$viewLetterCard = F2(
 						]))
 				]));
 	});
-var $author$project$Main$viewNumberCard = F2(
-	function (_char, word) {
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					$elm$html$Html$Attributes$class('bg-white border-2 border-slate-100 rounded-xl p-5 flex flex-col items-center justify-center gap-1 shadow-sm border-primary/20')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$span,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('text-primary text-2xl font-bold')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(
-							$elm$core$String$fromChar(_char))
-						])),
-					A2(
-					$elm$html$Html$span,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('text-3xl font-black text-[#0e101b] tracking-tight')
-						]),
-					_List_fromArray(
-						[
-							$elm$html$Html$text(
-							$elm$core$String$toUpper(word))
-						]))
-				]));
-	});
 var $author$project$Main$viewSpaceCard = A2(
 	$elm$html$Html$div,
 	_List_fromArray(
@@ -5701,17 +5667,17 @@ var $author$project$Main$viewSpaceCard = A2(
 var $author$project$Main$viewCard = function (_v0) {
 	var _char = _v0.a;
 	var phoneticWord = _v0.b;
-	var upperChar = $elm$core$Char$toUpper(_char);
-	var isSpace = _Utils_eq(
+	if (_Utils_eq(
 		_char,
-		_Utils_chr(' '));
-	var isNumber = $elm$core$Char$isDigit(upperChar);
-	if (isSpace) {
+		_Utils_chr(' '))) {
 		return $author$project$Main$viewSpaceCard;
 	} else {
 		if (phoneticWord.$ === 'Just') {
 			var word = phoneticWord.a;
-			return isNumber ? A2($author$project$Main$viewNumberCard, upperChar, word) : A2($author$project$Main$viewLetterCard, upperChar, word);
+			return A2(
+				$author$project$Main$viewLetterCard,
+				$elm$core$Char$toUpper(_char),
+				word);
 		} else {
 			return $elm$html$Html$text('');
 		}
