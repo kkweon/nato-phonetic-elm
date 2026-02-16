@@ -2,11 +2,16 @@ default: build
 
 
 build:
-	elm-make src/Main.elm --output docs/js/main.js
+	mkdir -p dist
+	cp -r public/css dist/
+	cp -r public/vendors dist/
+	cp public/index.html dist/
+	mkdir -p dist/js
+	npx elm make src/Main.elm --output dist/js/main.js
 
 
 clean:
-	rm -f docs/js/main.js
+	rm -rf dist
 
 
 .PHONY: build, clean
