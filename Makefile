@@ -16,4 +16,11 @@ clean:
 	rm -f docs/js/main.js
 
 
-.PHONY: build dev clean
+build-prod:
+	@echo "Updating sitemap.xml with current date..."
+	@sed -i.bak "s|<lastmod>.*</lastmod>|<lastmod>$$(date -u +%Y-%m-%d)</lastmod>|g" docs/sitemap.xml && rm -f docs/sitemap.xml.bak
+	@echo "Building optimized Elm application..."
+	elm make src/Main.elm --output docs/js/main.js --optimize
+
+
+.PHONY: build build-prod dev clean

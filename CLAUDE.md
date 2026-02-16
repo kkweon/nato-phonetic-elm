@@ -11,9 +11,10 @@ A simple Elm web application that converts text input into NATO phonetic alphabe
 ## Development Commands
 
 ```bash
-make dev      # Start elm reactor dev server at http://localhost:8000
-make build    # Compile Elm to docs/js/main.js for production
-make clean    # Remove built JavaScript files
+make dev         # Start elm reactor dev server at http://localhost:8000
+make build       # Compile Elm to docs/js/main.js (fast, unoptimized)
+make build-prod  # Production build: optimized + updates sitemap.xml
+make clean       # Remove built JavaScript files
 ```
 
 For development: navigate to http://localhost:8000/src/Main.elm after running `make dev`.
