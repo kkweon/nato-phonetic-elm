@@ -1,20 +1,17 @@
 module Main exposing (..)
 
+import Browser
 import NatoPhonetic exposing (natoPhonetic)
-import String
-import List
-import Char
-import Maybe
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Dict exposing (get)
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    beginnerProgram
-        { model = initModel
+    Browser.sandbox
+        { init = initModel
         , view = view
         , update = update
         }
