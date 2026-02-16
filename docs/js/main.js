@@ -5596,6 +5596,7 @@ var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
 	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
 };
+var $elm$core$String$trim = _String_trim;
 var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
@@ -5696,7 +5697,8 @@ var $author$project$Main$viewPhonetic = function (sentence) {
 			A2(
 				$elm$core$List$map,
 				$author$project$Main$char2Nato,
-				$elm$core$String$toList(sentence))));
+				$elm$core$String$toList(
+					$elm$core$String$trim(sentence)))));
 };
 var $author$project$Main$view = function (model) {
 	var inputSection = A2(

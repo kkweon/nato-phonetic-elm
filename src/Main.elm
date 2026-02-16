@@ -138,6 +138,7 @@ view model =
 viewPhonetic : String -> Html Msg
 viewPhonetic sentence =
     sentence
+        |> String.trim
         |> String.toList
         |> List.map char2Nato
         |> List.map viewCard
