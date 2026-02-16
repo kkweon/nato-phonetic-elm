@@ -6,7 +6,10 @@ build:
 
 
 dev:
-	elm reactor
+	@echo "Building and starting dev server..."
+	@elm make src/Main.elm --output docs/js/main.js
+	@echo "Server running at http://localhost:8000"
+	@cd docs && python3 -m http.server 8000
 
 
 clean:

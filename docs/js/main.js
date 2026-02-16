@@ -5206,7 +5206,24 @@ var $author$project$Main$ClearInputBox = {$: 'ClearInputBox'};
 var $author$project$Main$Convert = function (a) {
 	return {$: 'Convert', a: a};
 };
-var $elm$html$Html$br = _VirtualDom_node('br');
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$bool(bool));
+	});
+var $elm$html$Html$Attributes$autofocus = $elm$html$Html$Attributes$boolProperty('autofocus');
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
@@ -5217,9 +5234,15 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $elm$html$Html$i = _VirtualDom_node('i');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$virtual_dom$VirtualDom$node = function (tag) {
+	return _VirtualDom_node(
+		_VirtualDom_noScript(tag));
+};
+var $elm$html$Html$node = $elm$virtual_dom$VirtualDom$node;
+var $elm$core$Basics$not = _Basics_not;
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -5237,6 +5260,22 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$json$Json$Decode$andThen = _Json_andThen;
+var $elm$json$Json$Decode$fail = _Json_fail;
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $author$project$Main$onEscape = function (msg) {
+	var isEscape = function (key) {
+		return (key === 'Escape') ? $elm$json$Json$Decode$succeed(msg) : $elm$json$Json$Decode$fail('not escape');
+	};
+	return A2(
+		$elm$html$Html$Events$on,
+		'keydown',
+		A2(
+			$elm$json$Json$Decode$andThen,
+			isEscape,
+			A2($elm$json$Json$Decode$field, 'key', $elm$json$Json$Decode$string)));
+};
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
@@ -5250,12 +5289,10 @@ var $elm$html$Html$Events$stopPropagationOn = F2(
 			event,
 			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
 	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
 	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
 var $elm$html$Html$Events$targetValue = A2(
 	$elm$json$Json$Decode$at,
 	_List_fromArray(
@@ -5272,8 +5309,11 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 };
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $elm$html$Html$section = _VirtualDom_node('section');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $elm$core$Basics$compare = _Utils_compare;
 var $elm$core$Dict$get = F2(
@@ -5512,7 +5552,37 @@ var $author$project$NatoPhonetic$natoPhonetic = $elm$core$Dict$fromList(
 			'Zulu'),
 			_Utils_Tuple2(
 			_Utils_chr('-'),
-			'Dash')
+			'Dash'),
+			_Utils_Tuple2(
+			_Utils_chr('0'),
+			'Zero'),
+			_Utils_Tuple2(
+			_Utils_chr('1'),
+			'One'),
+			_Utils_Tuple2(
+			_Utils_chr('2'),
+			'Two'),
+			_Utils_Tuple2(
+			_Utils_chr('3'),
+			'Three'),
+			_Utils_Tuple2(
+			_Utils_chr('4'),
+			'Four'),
+			_Utils_Tuple2(
+			_Utils_chr('5'),
+			'Five'),
+			_Utils_Tuple2(
+			_Utils_chr('6'),
+			'Six'),
+			_Utils_Tuple2(
+			_Utils_chr('7'),
+			'Seven'),
+			_Utils_Tuple2(
+			_Utils_chr('8'),
+			'Eight'),
+			_Utils_Tuple2(
+			_Utils_chr('9'),
+			'Nine')
 		]));
 var $elm$core$Char$toUpper = _Char_toUpper;
 var $author$project$Main$char2Nato = function (x) {
@@ -5522,12 +5592,6 @@ var $author$project$Main$char2Nato = function (x) {
 		$elm$core$Char$toUpper(x));
 	return _Utils_Tuple2(x, phoneticWord);
 };
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
-var $elm$html$Html$table = _VirtualDom_node('table');
 var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
 	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
@@ -5536,133 +5600,281 @@ var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
 };
-var $elm$html$Html$td = _VirtualDom_node('td');
-var $elm$html$Html$tr = _VirtualDom_node('tr');
-var $author$project$Main$viewRow = function (_v0) {
+var $elm$core$String$toUpper = _String_toUpper;
+var $author$project$Main$viewLetterCard = F2(
+	function (_char, word) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('bg-white border-2 border-slate-100 rounded-xl p-5 flex flex-col items-center justify-center gap-1 shadow-sm hover:border-primary/30 transition-colors group')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('text-slate-400 text-2xl font-bold group-hover:text-primary transition-colors')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(
+							$elm$core$String$fromChar(_char))
+						])),
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('text-3xl font-black text-[#0e101b] tracking-tight')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(
+							$elm$core$String$toUpper(word))
+						]))
+				]));
+	});
+var $author$project$Main$viewNumberCard = F2(
+	function (_char, word) {
+		return A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('bg-white border-2 border-slate-100 rounded-xl p-5 flex flex-col items-center justify-center gap-1 shadow-sm border-primary/20')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('text-primary text-2xl font-bold')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(
+							$elm$core$String$fromChar(_char))
+						])),
+					A2(
+					$elm$html$Html$span,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('text-3xl font-black text-[#0e101b] tracking-tight')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text(
+							$elm$core$String$toUpper(word))
+						]))
+				]));
+	});
+var $author$project$Main$viewSpaceCard = A2(
+	$elm$html$Html$div,
+	_List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-5 flex flex-col items-center justify-center gap-1 shadow-sm')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$span,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('text-slate-400 text-sm font-bold')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('[SPACE]')
+				])),
+			A2(
+			$elm$html$Html$span,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('text-xl font-bold text-slate-400 uppercase tracking-widest')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('SPACE')
+				]))
+		]));
+var $author$project$Main$viewCard = function (_v0) {
 	var _char = _v0.a;
 	var phoneticWord = _v0.b;
-	var _v1 = function () {
+	var upperChar = $elm$core$Char$toUpper(_char);
+	var isSpace = _Utils_eq(
+		_char,
+		_Utils_chr(' '));
+	var isNumber = $elm$core$Char$isDigit(upperChar);
+	if (isSpace) {
+		return $author$project$Main$viewSpaceCard;
+	} else {
 		if (phoneticWord.$ === 'Just') {
-			var w = phoneticWord.a;
-			return _Utils_Tuple2(w, '⟼');
+			var word = phoneticWord.a;
+			return isNumber ? A2($author$project$Main$viewNumberCard, upperChar, word) : A2($author$project$Main$viewLetterCard, upperChar, word);
 		} else {
-			return _Utils_Tuple2('', '');
+			return $elm$html$Html$text('');
 		}
-	}();
-	var word = _v1.a;
-	var arrow = _v1.b;
-	return A2(
-		$elm$html$Html$tr,
-		_List_Nil,
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(
-						$elm$core$String$fromChar(
-							$elm$core$Char$toUpper(_char)))
-					])),
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(arrow)
-					])),
-				A2(
-				$elm$html$Html$td,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$elm$html$Html$text(word)
-					]))
-			]));
+	}
 };
-var $author$project$Main$sentence2Nato = function (xs) {
+var $author$project$Main$viewPhonetic = function (sentence) {
 	return A2(
-		$elm$html$Html$table,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('result-view')
+				$elm$html$Html$Attributes$class('phonetic-grid')
 			]),
 		A2(
 			$elm$core$List$map,
-			A2($elm$core$Basics$composeR, $author$project$Main$char2Nato, $author$project$Main$viewRow),
-			$elm$core$String$toList(xs)));
-};
-var $author$project$Main$viewPhonetic = function (sentence) {
-	return $author$project$Main$sentence2Nato(sentence);
+			$author$project$Main$viewCard,
+			A2(
+				$elm$core$List$map,
+				$author$project$Main$char2Nato,
+				$elm$core$String$toList(sentence))));
 };
 var $author$project$Main$view = function (model) {
-	var title = A2(
-		$elm$html$Html$h1,
+	var inputSection = A2(
+		$elm$html$Html$section,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('title')
+				$elm$html$Html$Attributes$class('bg-white rounded-xl p-6 shadow-sm border border-primary/5')
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text('Nato Phonetic Word Converter')
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('flex flex-col gap-2')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('text-sm font-bold uppercase tracking-wider text-slate-500'),
+								A2($elm$html$Html$Attributes$attribute, 'for', 'input-text')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Input Text')
+							])),
+						A2(
+						$elm$html$Html$p,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('text-slate-500 text-sm mb-2')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Type names or phrases below to see the phonetic conversion in real-time.')
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('relative')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('w-full rounded-xl border-2 border-slate-200 focus:border-primary focus:ring-0 p-4 pr-12 text-xl font-medium placeholder:text-slate-300 transition-all'),
+										A2($elm$html$Html$Attributes$attribute, 'id', 'input-text'),
+										$elm$html$Html$Attributes$placeholder('Enter name or text here (e.g. HELLO)...'),
+										$elm$html$Html$Events$onInput($author$project$Main$Convert),
+										$author$project$Main$onEscape($author$project$Main$ClearInputBox),
+										$elm$html$Html$Attributes$value(model.input),
+										$elm$html$Html$Attributes$autofocus(true)
+									]),
+								_List_Nil),
+								(!$elm$core$String$isEmpty(model.input)) ? A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$type_('button'),
+										$elm$html$Html$Attributes$class('absolute top-1/2 -translate-y-1/2 right-3 p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors text-2xl font-light cursor-pointer'),
+										$elm$html$Html$Events$onClick($author$project$Main$ClearInputBox),
+										A2($elm$html$Html$Attributes$attribute, 'title', 'Clear')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('×')
+									])) : $elm$html$Html$text('')
+							]))
+					]))
 			]));
-	var searchIcon = A2(
-		$elm$html$Html$i,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('ion-ios-search icon search-icon')
-			]),
-		_List_Nil);
-	var inputBox = A2(
-		$elm$html$Html$input,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$placeholder('Type a sentence'),
-				$elm$html$Html$Events$onInput($author$project$Main$Convert),
-				$elm$html$Html$Attributes$class('placeholder-view'),
-				$elm$html$Html$Attributes$value(model.input)
-			]),
-		_List_Nil);
-	var description = A2(
-		$elm$html$Html$p,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('description')
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text('Type any sentence and it will be converted to Nato Phonetic Words.')
-			]));
-	var clearIcon = $elm$core$String$isEmpty(model.input) ? $elm$html$Html$text('') : A2(
-		$elm$html$Html$i,
-		_List_fromArray(
-			[
-				$elm$html$Html$Attributes$class('ion-ios-close-empty icon clear-icon'),
-				$elm$html$Html$Events$onClick($author$project$Main$ClearInputBox)
-			]),
-		_List_Nil);
-	var inputArea = A2(
+	var charCount = $elm$core$String$length(model.input);
+	var resultsHeader = A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('input-area')
+				$elm$html$Html$Attributes$class('flex items-center justify-between px-2 flex-wrap gap-y-2')
 			]),
 		_List_fromArray(
-			[inputBox, searchIcon, clearIcon]));
+			[
+				A2(
+				$elm$html$Html$h3,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('text-xl font-bold text-[#0e101b]')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Conversion Result')
+					])),
+				A2(
+				$elm$html$Html$span,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromInt(charCount) + (' Character' + ((charCount === 1) ? '' : 's')))
+					]))
+			]));
+	var resultsSection = A2(
+		$elm$html$Html$section,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('space-y-4')
+			]),
+		_List_fromArray(
+			[
+				resultsHeader,
+				$author$project$Main$viewPhonetic(model.input)
+			]));
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('main-view')
+				$elm$html$Html$Attributes$class('relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden')
 			]),
 		_List_fromArray(
 			[
-				title,
-				description,
-				inputArea,
-				A2($elm$html$Html$br, _List_Nil, _List_Nil),
-				$author$project$Main$viewPhonetic(model.input)
+				A3(
+				$elm$html$Html$node,
+				'main',
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('flex-1 flex flex-col px-6 py-8 lg:px-20 gap-8 items-center')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('max-w-4xl space-y-8 w-full')
+							]),
+						_List_fromArray(
+							[inputSection, resultsSection]))
+					]))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(
